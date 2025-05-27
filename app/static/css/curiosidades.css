@@ -84,10 +84,11 @@
     background: linear-gradient(45deg, #0ef, #00fff0);
     color: #000;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 25px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    font-weight: 500;
 }
 
 .card a::before {
@@ -118,7 +119,7 @@
     background: linear-gradient(45deg, #0ef, #00fff0);
     color: #000;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 25px;
     transition: all 0.3s ease;
     font-weight: bold;
     text-align: center;
