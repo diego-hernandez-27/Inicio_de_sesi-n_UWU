@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="TE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Votación Electrónica - Curiosidades</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/curiosidad_detalle.css') }}">
+</head>
+<body>
+    <!-- SVG borde animado -->
+    <svg class="border-worm" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <defs>
+            <linearGradient id="worm-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0ef"/>
+                <stop offset="50%" stop-color="#00fff0"/>
+                <stop offset="100%" stop-color="#0ef"/>
+            </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="96" height="96" rx="8" fill="none" stroke="url(#worm-gradient)" stroke-width="2" stroke-dasharray="60 40" stroke-dashoffset="0">
+            <animate attributeName="stroke-dashoffset" from="0" to="-100" dur="2s" repeatCount="indefinite" />
+        </rect>
+    </svg>
+
+    <div class="center-box">
+        <div class="curiosidad-container">
+            <div class="curiosidad-header">
+                <div class="logo-container">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
+                </div>
+                <h1 class="curiosidad-title">Criptografía en Votación Electrónica</h1>
+                <p class="curiosidad-subtitle">Garantizando la seguridad y transparencia en las elecciones digitales</p>
+            </div>
+
+            <div class="curiosidad-content">
+                <div class="curiosidad-section">
+                    <h3>¿Qué es la Votación Electrónica?</h3>
+                    <p>La votación electrónica es un sistema que permite a los ciudadanos emitir su voto de manera digital, utilizando dispositivos electrónicos en lugar de papeletas físicas. La criptografía juega un papel fundamental en estos sistemas, garantizando la seguridad, privacidad y autenticidad de cada voto.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Dato importante:</strong> La votación electrónica no solo debe ser segura, sino también verificable y transparente, permitiendo a los votantes confirmar que su voto fue contado correctamente sin revelar su elección.</p>
+                    </div>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Mecanismos de Seguridad</h3>
+                    <p>Los sistemas de votación electrónica implementan múltiples capas de seguridad criptográfica:</p>
+                    <ul>
+                        <li><strong>Cifrado de extremo a extremo:</strong> Protege los votos durante la transmisión</li>
+                        <li><strong>Firmas digitales:</strong> Verifican la autenticidad de cada voto</li>
+                        <li><strong>Pruebas de conocimiento cero:</strong> Permiten verificar la validez del voto sin revelar su contenido</li>
+                        <li><strong>Algoritmos de mezclado:</strong> Desvinculan los votos de los votantes</li>
+                    </ul>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Desafíos y Soluciones</h3>
+                    <p>La implementación de sistemas de votación electrónica presenta varios desafíos que la criptografía ayuda a resolver:</p>
+                    <ul>
+                        <li><strong>Privacidad:</strong> Garantizar que nadie pueda vincular un voto con un votante específico</li>
+                        <li><strong>Integridad:</strong> Asegurar que los votos no puedan ser modificados</li>
+                        <li><strong>Verificabilidad:</strong> Permitir la verificación de resultados sin comprometer la privacidad</li>
+                        <li><strong>Accesibilidad:</strong> Facilitar el voto para personas con discapacidades</li>
+                    </ul>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Sistemas Avanzados</h3>
+                    <p>Algunos de los sistemas más avanzados de votación electrónica incluyen:</p>
+                    <ul>
+                        <li><strong>Votación con Pruebas de Conocimiento Cero:</strong> Permite verificar la validez del voto sin revelar su contenido</li>
+                        <li><strong>Votación Homomórfica:</strong> Permite realizar operaciones sobre votos cifrados</li>
+                        <li><strong>Votación con Umbral:</strong> Distribuye la autoridad de conteo entre múltiples entidades</li>
+                        <li><strong>Votación con Verificación de Extremo a Extremo:</strong> Permite a los votantes verificar que su voto fue contado correctamente</li>
+                    </ul>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Impacto en la Democracia</h3>
+                    <p>La criptografía en la votación electrónica tiene un impacto significativo en la democracia moderna:</p>
+                    <ul>
+                        <li>Aumenta la accesibilidad al proceso electoral</li>
+                        <li>Reduce los costos de organización de elecciones</li>
+                        <li>Facilita el voto desde el extranjero</li>
+                        <li>Mejora la transparencia y confianza en el proceso electoral</li>
+                    </ul>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Consideraciones Éticas y Sociales</h3>
+                    <p>La implementación de sistemas de votación electrónica debe considerar varios aspectos:</p>
+                    <ul>
+                        <li>Equilibrio entre seguridad y usabilidad</li>
+                        <li>Accesibilidad para todos los sectores de la población</li>
+                        <li>Transparencia en el proceso de verificación</li>
+                        <li>Protección contra la coerción y el voto forzado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <a href="{{ url_for('cifrado_cesar') }}" class="nav-btn">← Curiosidad Anterior</a>
+                <a href="{{ url_for('cifrado_pigpen') }}" class="nav-btn">Siguiente Curiosidad →</a>
+            </div>
+            <div class="pdf-button-container">
+                <a href="{{ url_for('votacion_electronica_pdf') }}" class="pdf-btn">Generar PDF</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

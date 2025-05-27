@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="TE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrado César - Curiosidades</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/curiosidad_detalle.css') }}">
+</head>
+<body>
+    <!-- SVG borde animado -->
+    <svg class="border-worm" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <defs>
+            <linearGradient id="worm-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0ef"/>
+                <stop offset="50%" stop-color="#00fff0"/>
+                <stop offset="100%" stop-color="#0ef"/>
+            </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="96" height="96" rx="8" fill="none" stroke="url(#worm-gradient)" stroke-width="2" stroke-dasharray="60 40" stroke-dashoffset="0">
+            <animate attributeName="stroke-dashoffset" from="0" to="-100" dur="2s" repeatCount="indefinite" />
+        </rect>
+    </svg>
+
+    <div class="center-box">
+        <div class="curiosidad-container">
+            <div class="curiosidad-header">
+                <div class="logo-container">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
+                </div>
+                <h1 class="curiosidad-title">El Cifrado César</h1>
+                <p class="curiosidad-subtitle">El primer sistema de cifrado de la historia</p>
+            </div>
+
+            <div class="curiosidad-content">
+                <div class="curiosidad-section">
+                    <h3>¿Qué es el Cifrado César?</h3>
+                    <p>El Cifrado César es uno de los métodos de cifrado más antiguos y conocidos de la historia. Fue utilizado por Julio César para proteger sus comunicaciones militares durante las campañas romanas. Este método de cifrado es un tipo de cifrado por sustitución, donde cada letra del texto original es reemplazada por otra letra que se encuentra un número fijo de posiciones más adelante en el alfabeto.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Ejemplo práctico:</strong> Si usamos un desplazamiento de 3 posiciones, la letra 'A' se convierte en 'D', 'B' en 'E', y así sucesivamente. Al llegar al final del alfabeto, se continúa desde el principio.</p>
+                    </div>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Historia y Origen</h3>
+                    <p>El Cifrado César tiene sus raíces en la antigua Roma, específicamente durante el período de Julio César (100-44 a.C.). Se dice que César utilizaba este método para comunicarse con sus generales y gobernadores en las provincias romanas. El desplazamiento de 3 posiciones que usaba César se conoce como "ROT3" en la terminología moderna de criptografía.</p>
+                    
+                    <p>Este método de cifrado fue tan efectivo para su época que incluso el gran orador Cicerón lo utilizó en algunas de sus comunicaciones privadas. La simplicidad del método lo hacía fácil de implementar, pero también lo hacía vulnerable a ataques de fuerza bruta.</p>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Importancia Histórica</h3>
+                    <p>El Cifrado César marcó un hito importante en la historia de la criptografía por varias razones:</p>
+                    <ul>
+                        <li>Fue uno de los primeros sistemas de cifrado documentados en la historia</li>
+                        <li>Estableció el concepto de clave de cifrado (el número de posiciones a desplazar)</li>
+                        <li>Demostró la importancia de la seguridad en las comunicaciones militares</li>
+                        <li>Sirvió como base para el desarrollo de sistemas de cifrado más complejos</li>
+                    </ul>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Legado en la Criptografía Moderna</h3>
+                    <p>Aunque el Cifrado César es considerado inseguro para aplicaciones modernas, su influencia en la criptografía es innegable:</p>
+                    <ul>
+                        <li>Inspiró el desarrollo de cifrados más complejos como el Vigenère</li>
+                        <li>Se utiliza como herramienta educativa para enseñar conceptos básicos de criptografía</li>
+                        <li>Sus principios se pueden encontrar en algoritmos modernos de cifrado</li>
+                        <li>Es un excelente ejemplo de la evolución de la seguridad informática</li>
+                    </ul>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Vulnerabilidades y Limitaciones</h3>
+                    <p>El Cifrado César tiene varias limitaciones que lo hacen inseguro para uso moderno:</p>
+                    <ul>
+                        <li>Fácil de descifrar mediante análisis de frecuencia de letras</li>
+                        <li>Solo tiene 25 posibles claves (desplazamientos)</li>
+                        <li>No protege contra ataques de fuerza bruta</li>
+                        <li>No incluye autenticación ni integridad del mensaje</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <a href="{{ url_for('curiosidades') }}" class="nav-btn">← Volver a Curiosidades</a>
+                <a href="{{ url_for('votacion_electronica') }}" class="nav-btn">Siguiente Curiosidad →</a>
+            </div>
+            <div class="pdf-button-container">
+                <a href="{{ url_for('cifrado_cesar_pdf') }}" class="pdf-btn">Generar PDF</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

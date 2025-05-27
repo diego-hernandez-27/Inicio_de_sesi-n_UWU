@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="TE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cifrado Pigpen - Curiosidades</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/curiosidad_detalle.css') }}">
+</head>
+<body>
+    <!-- SVG borde animado -->
+    <svg class="border-worm" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <defs>
+            <linearGradient id="worm-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0ef"/>
+                <stop offset="50%" stop-color="#00fff0"/>
+                <stop offset="100%" stop-color="#0ef"/>
+            </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="96" height="96" rx="8" fill="none" stroke="url(#worm-gradient)" stroke-width="2" stroke-dasharray="60 40" stroke-dashoffset="0">
+            <animate attributeName="stroke-dashoffset" from="0" to="-100" dur="2s" repeatCount="indefinite" />
+        </rect>
+    </svg>
+
+    <div class="center-box">
+        <div class="curiosidad-container">
+            <div class="curiosidad-header">
+                <div class="logo-container">
+                    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
+                </div>
+                <h1 class="curiosidad-title">El Cifrado Pigpen</h1>
+                <p class="curiosidad-subtitle">El lenguaje secreto de los masones</p>
+            </div>
+
+            <div class="curiosidad-content">
+                <div class="curiosidad-section">
+                    <h3>¿Qué es el Cifrado Pigpen?</h3>
+                    <p>El Cifrado Pigpen, también conocido como Cifrado Masónico, es un sistema de cifrado por sustitución que utiliza símbolos geométricos en lugar de letras. Este método fue ampliamente utilizado por los masones para comunicarse de manera secreta y proteger sus rituales y documentos.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Característica única:</strong> A diferencia de otros cifrados, el Pigpen utiliza símbolos que se asemejan a las letras que representan, lo que lo hace más fácil de memorizar pero también más fácil de descifrar para quienes conocen el patrón.</p>
+                    </div>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Origen e Historia</h3>
+                    <p>El Cifrado Pigpen tiene sus raíces en la masonería del siglo XVIII. Se cree que fue desarrollado como una forma de proteger la privacidad de las comunicaciones masónicas y mantener la confidencialidad de sus rituales y documentos. El nombre "Pigpen" (corral de cerdos) proviene de la apariencia de los símbolos, que algunos comparan con los corrales utilizados para encerrar cerdos.</p>
+                    
+                    <p>Este cifrado fue particularmente popular durante el período de la Ilustración, cuando las sociedades secretas como los masones necesitaban métodos de comunicación seguros para proteger sus actividades y miembros.</p>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Estructura del Cifrado</h3>
+                    <p>El Cifrado Pigpen se basa en una estructura geométrica simple:</p>
+                    <ul>
+                        <li>Utiliza dos cuadrículas de 3x3 para las letras</li>
+                        <li>La primera cuadrícula contiene las letras A-I</li>
+                        <li>La segunda cuadrícula contiene las letras J-R</li>
+                        <li>Las letras restantes (S-Z) se representan con símbolos especiales</li>
+                        <li>Cada letra se representa por las líneas que forman su "corral" en la cuadrícula</li>
+                    </ul>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Uso en la Masonería</h3>
+                    <p>Los masones utilizaron el Cifrado Pigpen para varios propósitos:</p>
+                    <ul>
+                        <li>Proteger la privacidad de sus rituales</li>
+                        <li>Comunicarse de manera segura entre logias</li>
+                        <li>Documentar información sensible</li>
+                        <li>Crear símbolos y marcas distintivas</li>
+                    </ul>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Legado Cultural</h3>
+                    <p>El Cifrado Pigpen ha dejado una huella significativa en la cultura popular:</p>
+                    <ul>
+                        <li>Aparece en numerosas obras de ficción y películas</li>
+                        <li>Se utiliza en juegos de escape room y acertijos</li>
+                        <li>Es popular en la literatura de misterio y conspiración</li>
+                        <li>Se enseña como ejemplo de cifrado histórico en cursos de criptografía</li>
+                    </ul>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Vulnerabilidades y Limitaciones</h3>
+                    <p>A pesar de su importancia histórica, el Cifrado Pigpen tiene varias limitaciones:</p>
+                    <ul>
+                        <li>Fácil de descifrar una vez que se conoce el patrón</li>
+                        <li>No proporciona una seguridad real en la era moderna</li>
+                        <li>Limitado a caracteres alfabéticos</li>
+                        <li>No incluye números ni caracteres especiales</li>
+                    </ul>
+                </div>
+
+                <div class="curiosidad-section">
+                    <h3>Uso Moderno</h3>
+                    <p>En la actualidad, el Cifrado Pigpen se utiliza principalmente para:</p>
+                    <ul>
+                        <li>Educación en criptografía básica</li>
+                        <li>Juegos y acertijos</li>
+                        <li>Arte y diseño</li>
+                        <li>Preservación histórica</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <a href="{{ url_for('votacion_electronica') }}" class="nav-btn">← Curiosidad Anterior</a>
+                <a href="{{ url_for('curiosidades') }}" class="nav-btn">Volver a Curiosidades</a>
+            </div>
+            <div class="pdf-button-container">
+                <a href="{{ url_for('cifrado_pigpen_pdf') }}" class="pdf-btn">Generar PDF</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
