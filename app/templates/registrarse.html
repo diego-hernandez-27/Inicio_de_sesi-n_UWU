@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/alerts.css') }}">
+    <style>
+        .password-match {
+            color: #dc3545;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
     <!-- SVG borde animado -->
@@ -27,30 +35,250 @@
                 <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="logo">
             </div>
             <h2>Registrarse</h2>
-            <form id="registrationForm" action="#">
+            <div class="alert-container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }}">
+                                <div class="alert-content">
+                                    <strong>{{ message }}</strong>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <form method="POST" action="{{ url_for('registrarse') }}" id="registrationForm">
+                {{ form.hidden_tag() }}
                 <div class="input-box">
-                    <input type="text" id="username" required>
+                    {{ form.username(class="form-control") }}
                     <label>Usuario</label>
+                    {% if form.username.errors %}
+                        {% for error in form.username.errors %}
+                            <div class="alert alert-error">
+                                <div class="alert-content">
+                                    <strong>{{ error }}</strong>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="input-box">
-                    <input type="email" id="email" required>
+                    {{ form.email(class="form-control") }}
                     <label>Email</label>
+                    {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                            <div class="alert alert-error">
+                                <div class="alert-content">
+                                    <strong>{{ error }}</strong>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="input-box">
-                    <input type="password" id="password" required>
+                    {{ form.password(class="form-control") }}
                     <label>Contraseña</label>
+                    {% if form.password.errors %}
+                        {% for error in form.password.errors %}
+                            <div class="alert alert-error">
+                                <div class="alert-content">
+                                    <strong>{{ error }}</strong>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
                 <div class="input-box">
-                    <input type="password" id="password2" required>
+                    {{ form.password2(class="form-control") }}
                     <label>Confirmar Contraseña</label>
+                    <div class="password-match" id="password-match"></div>
+                    {% if form.password2.errors %}
+                        {% for error in form.password2.errors %}
+                            <div class="alert alert-error">
+                                <div class="alert-content">
+                                    <strong>{{ error }}</strong>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
                 </div>
-                <button type="submit" class="btn login-btn">Registrarse</button>
+                {{ form.submit(class="btn login-btn") }}
                 <div class="signup-link">
                     <a href="{{ url_for('inicio') }}" class="register-btn">¿Ya tienes cuenta? Inicia Sesión</a>
                 </div>
             </form>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='js/validations.js') }}"></script>
+    <script>
+        // Función para manejar las alertas
+        function handleAlerts() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach((alert, index) => {
+                alert.style.top = `${20 + (index * 70)}px`;
+                setTimeout(() => {
+                    alert.style.animation = 'slideOut 0.3s ease-out';
+                    setTimeout(() => {
+                        alert.remove();
+                        handleAlerts();
+                    }, 300);
+                }, 3000);
+            });
+        }
+
+        // Función para mostrar alertas
+        function showAlert(message, type = 'error') {
+            const alertContainer = document.querySelector('.alert-container');
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.innerHTML = `
+                <div class="alert-content">
+                    <strong>${message}</strong>
+                </div>
+            `;
+            alertContainer.appendChild(alert);
+            handleAlerts();
+        }
+
+        // Función para validar el email
+        function validateEmail(email) {
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            return emailRegex.test(email);
+        }
+
+        // Función para validar la contraseña
+        function validatePassword(password) {
+            let isValid = true;
+            let errorMessage = '';
+            
+            // 1. Longitud mínima de 8 caracteres
+            if (password.length < 8) {
+                errorMessage = 'La contraseña debe tener al menos 8 caracteres';
+                isValid = false;
+            }
+            // 2. Al menos una mayúscula
+            else if (!/[A-Z]/.test(password)) {
+                errorMessage = 'La contraseña debe contener al menos una mayúscula';
+                isValid = false;
+            }
+            // 3. Al menos un número
+            else if (!/[0-9]/.test(password)) {
+                errorMessage = 'La contraseña debe contener al menos un número';
+                isValid = false;
+            }
+            // 4. Al menos un caracter especial
+            else if (!/[.,!)(#]/.test(password)) {
+                errorMessage = 'La contraseña debe contener al menos un carácter especial (.,!)(#)';
+                isValid = false;
+            }
+            // 5. No más de 4 repeticiones del mismo carácter
+            else {
+                const charCount = {};
+                for (const char of password) {
+                    charCount[char] = (charCount[char] || 0) + 1;
+                    if (charCount[char] > 4) {
+                        errorMessage = 'No se permiten más de 4 repeticiones del mismo carácter';
+                        isValid = false;
+                        break;
+                    }
+                }
+            }
+            
+            // 6. Sin secuencias consecutivas
+            if (isValid && password.length >= 4) {
+                for (let i = 0; i <= password.length - 4; i++) {
+                    const sequence = password.substr(i, 4);
+                    const char1 = sequence.charCodeAt(0);
+                    const char2 = sequence.charCodeAt(1);
+                    const char3 = sequence.charCodeAt(2);
+                    const char4 = sequence.charCodeAt(3);
+                    
+                    if ((char2 === char1 + 1 && char3 === char2 + 1 && char4 === char3 + 1) ||
+                        (char2 === char1 - 1 && char3 === char2 - 1 && char4 === char3 - 1)) {
+                        errorMessage = 'No se permiten secuencias consecutivas (ej: 1234, abcd)';
+                        isValid = false;
+                        break;
+                    }
+                }
+            }
+            
+            return { isValid, errorMessage };
+        }
+
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            handleAlerts();
+            
+            const form = document.getElementById('registrationForm');
+            
+            // Validar formulario al enviar
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                let hasErrors = false;
+                
+                // Validar campos vacíos
+                const username = document.getElementById('username').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('password2').value;
+                
+                if (!username) {
+                    showAlert('El campo Usuario es requerido');
+                    hasErrors = true;
+                }
+                
+                if (!email) {
+                    showAlert('El campo Email es requerido');
+                    hasErrors = true;
+                } else if (!validateEmail(email)) {
+                    showAlert('Por favor, ingrese un email válido');
+                    hasErrors = true;
+                }
+                
+                if (!password) {
+                    showAlert('El campo Contraseña es requerido');
+                    hasErrors = true;
+                } else {
+                    const { isValid, errorMessage } = validatePassword(password);
+                    if (!isValid) {
+                        showAlert(errorMessage);
+                        hasErrors = true;
+                    }
+                }
+                
+                if (!confirmPassword) {
+                    showAlert('El campo Confirmar Contraseña es requerido');
+                    hasErrors = true;
+                } else if (password !== confirmPassword) {
+                    showAlert('Las contraseñas no coinciden');
+                    hasErrors = true;
+                }
+                
+                // Si no hay errores, enviar el formulario
+                if (!hasErrors) {
+                    try {
+                        const formData = new FormData(form);
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: formData
+                        });
+                        
+                        const data = await response.json();
+                        
+                        if (data.success) {
+                            showAlert(data.message, 'success');
+                            setTimeout(() => {
+                                window.location.href = '/';
+                            }, 2000);
+                        } else {
+                            showAlert(data.message);
+                        }
+                    } catch (error) {
+                        showAlert('Error al procesar la solicitud');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
